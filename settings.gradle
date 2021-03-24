@@ -1,0 +1,3 @@
+include ':InfoChartLib'
+include ':app'
+rootProject.name = "InfoChart-Demo"
