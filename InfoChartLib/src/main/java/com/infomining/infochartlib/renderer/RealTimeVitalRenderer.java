@@ -120,6 +120,7 @@ public class RealTimeVitalRenderer {
             }
 
             canvas.drawLines(mLineBuffer, mRenderPaint);
+            //canvas.drawCircle(mLineBuffer[0], mLineBuffer[1], mChart.getLineWidth() / 2, mRenderPaint);
         }
 
         if(mChart.getEnabledValueCircleIndicator()) {
