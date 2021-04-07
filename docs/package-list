@@ -1,0 +1,7 @@
+com.infomining.infochartlib.chart
+com.infomining.infochartlib.data
+com.infomining.infochartlib.dataProvider
+com.infomining.infochartlib.handler
+com.infomining.infochartlib.renderer
+com.infomining.infochartlib.thread
+com.infomining.infochartlib.util
