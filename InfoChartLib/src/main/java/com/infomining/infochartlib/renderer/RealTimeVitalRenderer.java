@@ -57,12 +57,20 @@ public class RealTimeVitalRenderer {
         //mRenderPaint.setStyle(Paint.Style.STROKE);
     }
 
+    /**
+     * 렌더링 설정값 업데이트.
+     * 차트의 스펙이 변경될 경우 호출됨.
+     */
     public void updateSettings() {
         mDrawPointer = 0;
         mRemovePointer = mChart.getTotalRangeCount() - (int)(mChart.getTotalRangeCount() * (1 - mChart.getRefreshGraphInterval()));
         //mRemoveRangeCount = (int) (mChart.getTotalRangeCount() * mChart.getRefreshGraphInterval());
     }
 
+    /**
+     * 배열 포인터 이동.
+     * 데이터가 들어오기 전에 호출
+     */
     public void readyForUpdateData() {
         mDrawPointer++;
         mRemovePointer++;
@@ -75,6 +83,10 @@ public class RealTimeVitalRenderer {
         }
     }
 
+    /**
+     * 실시간 데이터 렌더링.
+     * @param canvas        onDraw()를 통해 가져올 수 있는 canvas를 파라미터로 사용
+     */
     public void drawVitalValue(Canvas canvas) {
         switch (mChart.getLineMode()) {
             case LINEAR:
@@ -141,6 +153,13 @@ public class RealTimeVitalRenderer {
 
     }
 
+    /**
+     * 지워지는 그라데이션 부분의 Alpha 값 계산
+     * @param totalCount    지워지는 전체 Count
+     * @param count         그려지는 부분의 Count
+     * @return              전체 부분에서 그려지는 부분의 Alpha 값을 리턴
+     *                      ex) 지워질 그라데이션 전체가 100이고, 현재 그려지고 있는 부분이 30이라면, 이 부분의 비율인 30%를 alpha값으로 치환하여 리턴
+     */
     private int calculateAlphaRatio(int totalCount, int count) {
         float ratio = (float)count / totalCount;
         return (int) (255 * ratio);

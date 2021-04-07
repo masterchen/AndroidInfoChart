@@ -17,17 +17,40 @@ import com.infomining.infochartlib.thread.DrawingThread;
 import com.infomining.infochartlib.util.Transformer;
 import com.infomining.infochartlib.util.ViewPortHandler;
 
+/**
+ * ECG 및 생체신호 실시간 차트를 그려주는 클래스.
+ *
+ *   For Example :
+ *  <pre>
+ *      chart.setRealTimeSpec(spec);
+ *      chart.getDataHandler().run();
+ *      chart.getDataHandler().enqueue(2f);
+ *      chart.getDataHandler().stop();
+ *      chart.getDataHandler().destroy();
+ *  </pre>
+ *
+ * @author Dahun Kim
+ */
 public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataProvider, SurfaceHolder.Callback {
 
+    /**
+     * 빈 데이터 값. Null의 의미를 가짐.
+     */
     public static float EMPTY_DATA = -9999;
 
     /**
      * 실시간 차트 스펙
+     *
+     * @see #setRealTimeSpec(Spec)
      */
     protected Spec mSpec = new Spec();
 
     /**
-     * 실시간 데이터
+     * 실시간 데이터, 렌더링 시 출력되는 데이터를 담고 있음.
+     * ( 배열의 index를 x 값으로 사용, 배열의 값을 y 값으로 사용 )
+     *
+     * @see #addRealTimeData(float)
+     * @see #getRealTimeDataList()
      */
     protected float[] mRealTimeData;
 
@@ -48,41 +71,63 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
 
     /**
      * 서로 다른 좌표계에서 x, y value 를 변한
+     *
+     * @see #settingTransformer()
+     * @see #getTransformer()
      */
     protected Transformer mTransformer;
 
     /**
      * 차트 선 색상
+     *
+     * @see #getLineColor()
+     * @see #setLineColor(int)
      */
     protected int mLineColor;
 
     /**
      * 차트 선 두께
+     *
+     * @see #getLineWidth()
+     * @see #setLineWidth(float)
      */
     protected float mLineWidth;
 
     /**
      * 차트 선 모양
+     *
+     * @see #getLineMode()
      */
     protected LineMode mLineMode;
 
     /**
      * 현재 값 인디케이터 활성 여부
+     * 
+     * @see #getEnabledValueCircleIndicator() 
+     * @see #setEnabledValueCircleIndicator(boolean) 
      */
     protected boolean isEnabledValueCircleIndicator;
 
     /**
      * 현재 값 인디케이터 크기
+     * 
+     * @see #getValueCircleIndicatorRadius() 
+     * @see #setValueCircleIndicatorRadius(float) 
      */
     protected float mValueCircleIndicatorRadius;
 
     /**
      * 현재 값 인디케이터 색상
+     * 
+     * @see #getValueCircleIndicatorColor() 
+     * @see #setValueCircleIndicatorColor(int)
      */
     protected int mValueCircleIndicatorColor;
 
     /**
      * 실시간 데이터 핸들러
+     *
+     * @see #getDataHandler()
      */
     protected RealTimeDataHandler mDataHandler;
 
@@ -130,6 +175,9 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
         }
     }
 
+    /**
+     * 차트 선의 색상 및 두께 등 렌더링 정보 초기화와 Transformer, 렌더링 객체, 데이터 핸들러를 할당.
+     */
     private void init() {
         getHolder().addCallback(this);
 
@@ -149,6 +197,10 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
         setRealTimeSpec(mSpec);
     }
 
+    /**
+     * 실시간 차트 스펙 설정
+     * @param spec      설정될 차트 스펙 객체
+     */
     public void setRealTimeSpec(Spec spec) {
         this.mSpec = spec;
         mRealTimeVitalRenderer.updateSettings();
@@ -157,6 +209,10 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
         resetRealTimeData();
     }
 
+    /**
+     * 실시간 데이터를 렌더링에 사용되는 배열에 추가. Queue에서 dequeue된 데이터를 렌더링하고자 할 때 사용함.
+     * @param value     추가될 실시간 데이터
+     */
     private void addRealTimeData(float value) {
         mRealTimeVitalRenderer.readyForUpdateData();
 
@@ -166,6 +222,9 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
         //invalidate();
     }
 
+    /**
+     * 좌표변환계 설정
+     */
     private void settingTransformer() {
         mTransformer.initOffsetMatrix();
         mTransformer.initValueMatrix(0, mSpec.getVitalMinValue(),
@@ -173,12 +232,18 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
                 mSpec.getVitalMaxValue() - mSpec.getVitalMinValue());
     }
 
+    /**
+     * 그려진 실시간 데이터 삭제
+     */
     private void resetRealTimeData() {
         for (int i = 0; i < mRealTimeData.length ; i++) {
             mRealTimeData[i] = EMPTY_DATA;
         }
     }
 
+    /**
+     * 차트 리셋. 그려진 데이터와 아직 출력되지 않고 Queue에 남은 데이터도 초기화되며, 데이터 핸들러 스케쥴러가 정지됨.
+     */
     public void reset() {
         resetRealTimeData();
         mDataHandler.stop();

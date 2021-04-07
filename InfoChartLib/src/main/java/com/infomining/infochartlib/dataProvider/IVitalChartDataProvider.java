@@ -4,6 +4,10 @@ package com.infomining.infochartlib.dataProvider;
 import com.infomining.infochartlib.chart.RealTimeVitalChart;
 import com.infomining.infochartlib.util.Transformer;
 
+/**
+ * 실시간 차트의 설정값 및 정보 전달자
+ * @author Dahun Kim
+ */
 public interface IVitalChartDataProvider {
 
     int getOneSecondDataCount();

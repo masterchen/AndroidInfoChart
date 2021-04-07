@@ -1,7 +1,6 @@
 package com.infomining.infochart_demo.activity
 
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import com.infomining.infochart_demo.DummyData
 import com.infomining.infochart_demo.R

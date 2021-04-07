@@ -2,6 +2,11 @@ package com.infomining.infochartlib.util;
 
 import android.graphics.RectF;
 
+/**
+ * 차트 View의 정보를 담는 클래스.
+ *
+ * @author Dahun Kim
+ */
 public class ViewPortHandler {
 
     protected float mChartHeight;
