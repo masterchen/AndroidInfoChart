@@ -1,5 +1,8 @@
 ![symbol](https://user-images.githubusercontent.com/57319751/113797582-82c38780-978c-11eb-8c1a-443597935f4a.png)
 
+![Generic badge](https://img.shields.io/badge/version-v1.0.0-blue.svg)
+![Generic badge](https://img.shields.io/badge/API-+19-orange.svg)
+
 # InfoCharts-Android
 
 **InfoCharts**는 우리 회사 앱에 사용될 `자체 제작 차트 라이브러리` 입니다.
@@ -10,14 +13,15 @@ iOS 버전의 라이브러리를 사용하고자 한다면, [여기](https://git
 
 ### AAR
 
+1. SDK 파일을 [다운로드](https://www.dropbox.com/s/ms924qb14dsf5kc/InfoChartSDK_v1.0.0.aar?dl=0)합니다.
 
-1. **'InfoChartSDK.aar'** 파일을 아래 경로로 이동시킵니다.
+2. **'InfoChartSDK.aar'** 파일을 아래 경로로 이동시킵니다.
 
     ```kotlin
     app/libs
     ```
 
-2. app 모듈 단위의 Gradle 파일을 아래와 같이 수정합니다.
+3. app 모듈 단위의 Gradle 파일을 아래와 같이 수정합니다.
 
     ```kotlin
     dependencies {
