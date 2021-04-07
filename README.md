@@ -4,7 +4,7 @@
 
 **InfoCharts**는 우리 회사 앱에 사용될 `자체 제작 차트 라이브러리` 입니다.
 
-iOS 버전의 라이브러리를 사용하고자 한다면, 여기를 눌러주십시오.
+iOS 버전의 라이브러리를 사용하고자 한다면, [여기](https://github.com/infodevelop/iOSInfoChart)를 눌러주십시오.
 
 # ⚙️ Setting
 
