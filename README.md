@@ -27,7 +27,7 @@ iOS 버전의 라이브러리를 사용하고자 한다면, [여기](https://git
     dependencies {
     	...
     		
-    	implementation name: 'infoChartSDK', ext: 'aar'
+    	implementation name: 'infoChartSDK_vx.y.z', ext: 'aar'
     }
     ```
 
