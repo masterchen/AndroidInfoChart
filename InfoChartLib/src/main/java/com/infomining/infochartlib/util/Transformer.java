@@ -2,6 +2,11 @@ package com.infomining.infochartlib.util;
 
 import android.graphics.Matrix;
 
+/**
+ * 좌표 변환계
+ *
+ * @author Dahun Kim
+ */
 public class Transformer {
 
     protected Matrix mOffsetMatrix = new Matrix();

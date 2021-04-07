@@ -6,6 +6,11 @@ import android.graphics.Color;
 import com.infomining.infochartlib.dataProvider.ISurfaceHolder;
 import com.infomining.infochartlib.renderer.RealTimeVitalRenderer;
 
+/**
+ * SurfaceView의 렌더링 스레드
+ *
+ * @author Dahun Kim
+ */
 public class DrawingThread extends Thread {
 
     private final ISurfaceHolder surfaceHolder;

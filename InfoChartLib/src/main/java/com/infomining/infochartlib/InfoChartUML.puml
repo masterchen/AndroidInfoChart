@@ -1,0 +1,216 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class RealTimeVitalChart {
+    + {static} EMPTY_DATA: float = -9999
+    # mSpec: Spec
+    # mRealTimeData: float[]
+    # mDrawingThread: DrawingThread
+    # mRealTimeVitalRenderer: RealTimeVitalRenderer
+    # mViewPortHandler: ViewPortHandler
+    # mTransformer: Transformer
+    # mLineColor: int
+    # mLineWidth: float
+    # mLineMode: LineMode
+    # mValueCircleIndicatorRadius: float
+    # mValueCircleIndicatorColor: int
+    # mDataHandler: RealTimeDataHandler
+
+    - init(): void
+    + setRealTimeSpec(Spec): void
+    - addRealTimeData(float): void
+    - settingTransformer(): void
+    - resetRealTimeData(): void
+    + reset(): void
+    + getDataHandler(): RealTimeDataHandler
+    + setLineColor(int): void
+    + setLineWidth(float): void
+    + setEnabledValueCircleIndicator(boolean): void
+    + setValueCircleIndicatorRadius(boolean): void
+    + setValueCircleIndicatorColor(int): void
+}
+
+enum RealTimeVitalChart.LineMode {
+    LINEAR
+    CUBIC
+}
+
+interface IVitalChartDataProvider {
+    + getOneSecondDataCount(): int
+    + getVisibleSecondRange(): int
+    + getTotalRangeCount(): int
+    + getRefreshGraphInterval(): float
+    + getRealTimeDataList(): float[]
+    + getLineColor(): int
+    + getLineWidth(): float
+    + getLineMode(): RealTimeVitalChart.LineMode
+    + getEnabledValueCircleIndicator(): boolean
+    + getValueCircleIndicatorRadius(): float
+    + getValueCircleIndicatorColor(): int
+    + getVitalMaxValue(): float
+    + getVitalMinValue(): float
+    + getTransformer(): Transformer
+    + dequeueRealTimeData(float): void
+}
+
+interface SurfaceHolder<android.view>
+
+interface SurfaceHolder.Callback {
+    + surfaceCreated(SurfaceHolder): void
+    + surfaceChanged(SurfaceHolder, int, int, int)
+    + surfaceDestroyed(SurfaceHolder)
+}
+
+class SurfaceView<android.view>
+
+class Spec {
+    # mOneSecondDataCount: int
+    # mVisibleSecondRage: int
+    # mRefreshGraphInterval: float
+    # mVitalMaxValue: float
+    # mVitalMinValue: float
+
+    + Spec(int, int, float, float, float)
+    + setOneSecondDataCount(int): void
+    + setVisibleSecondRange(int): void
+    + setRefreshGraphInterval(float): void
+    + setVitalMaxValue(float): void
+    + setVitalMinValue(float): void
+    + getOneSecondDataCount(): int
+    + getVisibleSecondRange(): int
+    + getRefreshGraphInterval(): float
+    + getVitalMaxValue(): float
+    + getVitalMinValue(): float
+}
+
+interface ISurfaceHolder {
+    + unlockCanvasAndPost(Canvas): void
+    + lockCanvas(): Canvas
+}
+
+class SurfaceViewHolder {
+    - surfaceHolder: SurfaceHolder
+    + SurfaceViewHolder(SurfaceHolder)
+}
+
+class RealTimeDataHandler {
+    - mainQueue: Queue<Float>
+    - mChart: IVitalChartDataProvider
+    - defaultValue: Float
+    - dequeueValue: Float
+    - executorService: ScheduledExecutorService
+    - task: DataDequeueTask
+    - isRunning: boolean
+    - future: Future
+
+    + RealTimeDataHandler(IVitalChartDataProvider)
+    + updateSettings(): void
+    + enqueue(float): void
+    - dequeue(): void
+    + run(): void
+    + stop(): void
+    + reset(): void
+    + destroy(): void
+}
+
+class RealTimeDataHandler.DataDequeueTask {
+    - mOneDataTime: int
+    - prevTime: long
+    - nowTime: long
+
+    # DataDequeueTask(int)
+}
+
+interface Runnable<java> {
+    + run(): void
+}
+
+class RealTimeVitalRenderer {
+    # mChart: IVitalChartDataProvider
+    # mDrawPointer: int = 0
+    # mRemovePointer: int = 0
+    # mTransformer: Transformer
+    # mRenderPaint: Paint
+    # GRADIENT_RATIO: float = 0.1f
+    # mRemoveRangeCount: int = 0
+    # mLineBuffer: float[4]
+    # firstY: float
+    # secondY: float
+    # x: int = 0
+    # alphaCount: int = 0
+
+    + RealTimeVitalRenderer(IVitalChartDataProvider)
+    + updateSettings(): void
+    + readyForUpdateData(): void
+    + drawVitalValue(Canvas): void
+    - drawLinear(Canvas): void
+    - calculateAlphaRatio(int, int): int
+    + getDrawPointer(): int
+    + getRemovePointer(): int
+}
+
+class DrawingThread {
+    - surfaceHolder: ISurfaceHolder
+    - renderer: RealTimeVitalRenderer
+    - isRunning: boolean = false
+    - previousTime: long
+    - fps: int = 70
+
+    + DrawingThread(ISurfaceHolder, RealTimeVitalRenderer)
+    + setRunning(boolean): void
+}
+
+class Thread<java> {
+    + run(): void
+}
+
+class Transformer {
+    # mOffsetMatrix: Matrix
+    # mValueMatrix: Matrix
+    # mViewPortHandler: ViewPortHandler
+
+    + Transformer(ViewPortHandler)
+    + valuesToPixel(float[]): void
+    + initValueMatrix(float, float, float, float): void
+    + initOffsetMatrix(): void
+}
+
+class ViewPortHandler {
+    # mChartHeight: float
+    # mChartWidth: Float
+    # mContentRect: RectF
+
+    + setChartDimens(float, float): void
+    + setOffset(float, float, float, float): void
+    + getOffsetLeft(): float
+    + getOffsetTop(): float
+    + getOffsetRight(): float
+    + getOffsetBottom(): float
+    + getContentWidth(): float
+    + getChartHeight(): float
+}
+
+RealTimeVitalChart <|.. IVitalChartDataProvider
+RealTimeVitalChart - RealTimeVitalChart.LineMode
+SurfaceHolder -- SurfaceHolder.Callback
+SurfaceView <|-- RealTimeVitalChart
+SurfaceHolder.Callback <|.. RealTimeVitalChart
+RealTimeVitalChart *-- RealTimeVitalRenderer
+RealTimeVitalChart *-- RealTimeDataHandler
+RealTimeVitalChart *--- DrawingThread
+RealTimeVitalChart *-- Transformer
+RealTimeVitalChart *-- ViewPortHandler
+RealTimeVitalChart o-- Spec
+RealTimeDataHandler.DataDequeueTask - RealTimeDataHandler
+Runnable <|.. RealTimeDataHandler.DataDequeueTask
+Thread <|-- DrawingThread
+
+DrawingThread *-- RealTimeVitalRenderer
+
+ISurfaceHolder <|.. SurfaceViewHolder
+DrawingThread *-- ISurfaceHolder
+
+IVitalChartDataProvider <-- RealTimeVitalRenderer
+IVitalChartDataProvider <-- RealTimeDataHandler
+
+@enduml
