@@ -161,7 +161,7 @@ public class RealTimeDataHandler {
 
             nowTime = System.currentTimeMillis();
             totalOverDelayTime += nowTime - prevTime - 2;
-            Log.e("Log", "delay = " + (nowTime - prevTime) + ", totalOverDelayTime = " + totalOverDelayTime);
+            //Log.e("Log", "delay = " + (nowTime - prevTime) + ", totalOverDelayTime = " + totalOverDelayTime);
             prevTime = nowTime;
         }
 
