@@ -35,6 +35,11 @@ public class RealTimeDataHandler {
     Float defaultValue;
 
     /**
+     * 마지막으로 dequeue된 값.
+     */
+    Float lastValue;
+
+    /**
      * 출력될 값을 담는 임시 변수.
      */
     Float dequeueValue;
@@ -80,8 +85,10 @@ public class RealTimeDataHandler {
      * Queue Dequeue.
      */
     private void dequeue() {
+        lastValue = dequeueValue;
         dequeueValue = mainQueue.poll();
-        dequeueValue = (dequeueValue != null) ? dequeueValue : defaultValue;
+        //dequeueValue = (dequeueValue != null) ? dequeueValue : defaultValue;
+        dequeueValue = (dequeueValue != null) ? dequeueValue : lastValue;
         mChart.dequeueRealTimeData(dequeueValue);
     }
 
@@ -126,7 +133,9 @@ public class RealTimeDataHandler {
      */
     public void destroy() {
         stop();
-        executorService.shutdown();
+        if(!executorService.isShutdown()) {
+            executorService.shutdown();
+        }
     }
 
     /**
@@ -138,19 +147,22 @@ public class RealTimeDataHandler {
         int mOneDataTime;
         long prevTime;
         long nowTime;
+        long totalOverDelayTime;
 
         DataDequeueTask(int oneSecondDataCount) {
-            this.mOneDataTime = Math.max(1000000 / oneSecondDataCount, 1) / 2;
-            //this.prevTime = System.currentTimeMillis();
+            // TODO: 최적화를 위한 계산식 수정
+            this.mOneDataTime = (int) Math.max((1000000 / oneSecondDataCount) * 0.8, 1);
+            this.prevTime = System.currentTimeMillis();
         }
 
         @Override
         public void run() {
             dequeue();
 
-            //nowTime = System.currentTimeMillis();
-            //Log.e("Log", "delay = " + (nowTime - prevTime));
-            //prevTime = nowTime;
+            nowTime = System.currentTimeMillis();
+            totalOverDelayTime += nowTime - prevTime - 2;
+            Log.e("Log", "delay = " + (nowTime - prevTime) + ", totalOverDelayTime = " + totalOverDelayTime);
+            prevTime = nowTime;
         }
 
     }
