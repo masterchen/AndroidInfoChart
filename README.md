@@ -1,6 +1,6 @@
 ![symbol](https://user-images.githubusercontent.com/57319751/113797582-82c38780-978c-11eb-8c1a-443597935f4a.png)
 
-![Generic badge](https://img.shields.io/badge/version-v1.0.0-blue.svg)
+![Generic badge](https://img.shields.io/badge/version-v1.1.0-blue.svg)
 ![Generic badge](https://img.shields.io/badge/API-+19-orange.svg)
 
 # InfoCharts-Android
@@ -13,7 +13,7 @@ iOS 버전의 라이브러리를 사용하고자 한다면, [여기](https://git
 
 ### AAR
 
-1. SDK 파일을 [다운로드](https://www.dropbox.com/s/ms924qb14dsf5kc/InfoChartSDK_v1.0.0.aar?dl=0)합니다.
+1. SDK 파일을 [다운로드](https://www.dropbox.com/s/gi178cz9vnbyhl2/InfoChartSDK_v1.1.0.aar?dl=0)합니다.
 
 2. **'InfoChartSDK.aar'** 파일을 아래 경로로 이동시킵니다.
 
@@ -27,7 +27,7 @@ iOS 버전의 라이브러리를 사용하고자 한다면, [여기](https://git
     dependencies {
     	...
     		
-    	implementation name: 'infoChartSDK_vx.y.z', ext: 'aar'
+    	implementation name: 'InfoChartSDK_vx.y.z', ext: 'aar'
     }
     ```
 
