@@ -207,6 +207,7 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
         mDataHandler.updateSettings();
         mRealTimeData = new float[mSpec.getOneSecondDataCount() * mSpec.getVisibleSecondRange()];
         resetRealTimeData();
+        //settingTransformer();
     }
 
     /**
