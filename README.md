@@ -5,30 +5,54 @@
 
 # InfoCharts-Android
 
-**InfoCharts**는 우리 회사 앱에 사용될 `자체 제작 차트 라이브러리` 입니다.
+**InfoCharts**는 **InfoMining Co., Ltd**의 앱에 사용될 `자체 제작 차트 라이브러리` 입니다.
 
 iOS 버전의 라이브러리를 사용하고자 한다면, [여기](https://github.com/infodevelop/iOSInfoChart)를 눌러주십시오.
 
 # ⚙️ Setting
 
-### AAR
+### Gradle
 
-1. SDK 파일을 [다운로드](https://www.dropbox.com/s/gi178cz9vnbyhl2/InfoChartSDK_v1.1.0.aar?dl=0)합니다.
+1. **Project** 단위의 **build.gradle**에 다음과 같은 내용을 추가합니다.
+    
+    ```gradle
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
+    ```
+    
+2. Dependency를 추가합니다.
 
-2. **'InfoChartSDK.aar'** 파일을 아래 경로로 이동시킵니다.
-
-    ```kotlin
-    app/libs
+    ```gradle
+    dependencies {
+        implementation 'com.github.infodevelop:AndroidInfoChart:vX.Y.Z'
+    }
     ```
 
-3. app 모듈 단위의 Gradle 파일을 아래와 같이 수정합니다.
+### Maven
 
-    ```kotlin
-    dependencies {
-    	...
-    		
-    	implementation name: 'InfoChartSDK_vx.y.z', ext: 'aar'
-    }
+1. **build file**에 **jitPack Repository** 정보를 추가합니다.
+    
+    ```maven
+    <repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+    ```
+
+2. **Dependency**를 추가합니다.
+
+    ```maven
+    <dependency>
+	    <groupId>com.github.infodevelop</groupId>
+	    <artifactId>AndroidInfoChart</artifactId>
+	    <version>Tag</version>
+	</dependency>
     ```
 
 # 📈 Charts
