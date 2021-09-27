@@ -1,34 +1,58 @@
 ![symbol](https://user-images.githubusercontent.com/57319751/113797582-82c38780-978c-11eb-8c1a-443597935f4a.png)
 
-![Generic badge](https://img.shields.io/badge/version-v1.0.0-blue.svg)
+![Generic badge](https://img.shields.io/badge/version-v1.1.0-blue.svg)
 ![Generic badge](https://img.shields.io/badge/API-+19-orange.svg)
 
 # InfoCharts-Android
 
-**InfoCharts**는 우리 회사 앱에 사용될 `자체 제작 차트 라이브러리` 입니다.
+**InfoCharts**는 **InfoMining Co., Ltd**의 앱에 사용될 `자체 제작 차트 라이브러리` 입니다.
 
 iOS 버전의 라이브러리를 사용하고자 한다면, [여기](https://github.com/infodevelop/iOSInfoChart)를 눌러주십시오.
 
 # ⚙️ Setting
 
-### AAR
+### Gradle
 
-1. SDK 파일을 [다운로드](https://www.dropbox.com/s/ms924qb14dsf5kc/InfoChartSDK_v1.0.0.aar?dl=0)합니다.
+1. **Project** 단위의 **build.gradle**에 다음과 같은 내용을 추가합니다.
+    
+    ```gradle
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
+    ```
+    
+2. Dependency를 추가합니다.
 
-2. **'InfoChartSDK.aar'** 파일을 아래 경로로 이동시킵니다.
-
-    ```kotlin
-    app/libs
+    ```gradle
+    dependencies {
+        implementation 'com.github.infodevelop:AndroidInfoChart:vX.Y.Z'
+    }
     ```
 
-3. app 모듈 단위의 Gradle 파일을 아래와 같이 수정합니다.
+### Maven
 
-    ```kotlin
-    dependencies {
-    	...
-    		
-    	implementation name: 'infoChartSDK_vx.y.z', ext: 'aar'
-    }
+1. **build file**에 **jitPack Repository** 정보를 추가합니다.
+    
+    ```maven
+    <repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+    ```
+
+2. **Dependency**를 추가합니다.
+
+    ```maven
+    <dependency>
+	    <groupId>com.github.infodevelop</groupId>
+	    <artifactId>AndroidInfoChart</artifactId>
+	    <version>Tag</version>
+	</dependency>
     ```
 
 # 📈 Charts
@@ -145,3 +169,21 @@ ECG 등의 `실시간 생체 신호`를 표시해주는 차트입니다. 실제 
 
 # 📄 Documentaion
 - SDK에 대한 상세한 정보는 [JavaDoc](https://infodevelop.github.io/AndroidInfoChart/)을 통해 확인하실 수 있습니다.
+
+# 📃 License
+
+```
+Copyright 2021 InfoMining Co., Ltd
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
