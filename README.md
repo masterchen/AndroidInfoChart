@@ -60,7 +60,7 @@ iOS 버전의 라이브러리를 사용하고자 한다면, [여기](https://git
 ## 1. RealTimeVitalChart
 
 
-![RealTimeVitalChart Video](https://user-images.githubusercontent.com/57319751/113797689-b6061680-978c-11eb-98a9-de5ced40b574.gif)
+![RealTimeVitalChart Video](https://user-images.githubusercontent.com/57319751/135749631-77d23c48-64d3-4106-a03a-d6ba77ea0747.gif)
 
 ECG 등의 `실시간 생체 신호`를 표시해주는 차트입니다. 실제 의료기기에서 표시되는 동일한 애니메이션이 지원됩니다.
 
