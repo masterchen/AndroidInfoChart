@@ -36,7 +36,7 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
     /**
      * 빈 데이터 값. Null의 의미를 가짐.
      */
-    public static float EMPTY_DATA = -9999;
+    public static float EMPTY_DATA = -999999;
 
     /**
      * 실시간 차트 스펙
