@@ -87,8 +87,8 @@ public class RealTimeDataHandler {
     private void dequeue() {
         lastValue = dequeueValue;
         dequeueValue = mainQueue.poll();
-        //dequeueValue = (dequeueValue != null) ? dequeueValue : defaultValue;
-        dequeueValue = (dequeueValue != null) ? dequeueValue : lastValue;
+        dequeueValue = (dequeueValue != null) ? dequeueValue : defaultValue;
+        //dequeueValue = (dequeueValue != null) ? dequeueValue : lastValue;
         mChart.dequeueRealTimeData(dequeueValue);
     }
 
