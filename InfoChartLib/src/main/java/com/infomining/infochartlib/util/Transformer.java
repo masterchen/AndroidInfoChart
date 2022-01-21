@@ -1,5 +1,6 @@
 package com.infomining.infochartlib.util;
 
+import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
 /**
@@ -30,6 +31,17 @@ public class Transformer {
 
         mValueMatrix.postTranslate(-xMin, -yMin);
         mValueMatrix.postScale(scaleX, -scaleY);
+    }
+
+    public Bitmap resizeBitmap(Bitmap bitmap, int newWidth, int newHeight) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap resized = Bitmap.createBitmap(bitmap, 0, 0,width, height, matrix, false);
+        return resized;
     }
 
     public void initOffsetMatrix() {

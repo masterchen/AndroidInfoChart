@@ -2,6 +2,7 @@ package com.infomining.infochart_demo.activity
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.infomining.infochart_demo.DummyData
@@ -56,13 +57,15 @@ class RealTimeChartActivity : BaseActivity() {
     }
 
     private fun initChart() {
+        Log.e("chart", "차트 초기화")
         spec = Spec()
         chart.setRealTimeSpec(spec)
+        chart.setChartBackground(ResourcesCompat.getDrawable(resources, R.drawable.ecg_background, null))
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        chart.dataHandler.destroy()
+        chart.destory()
     }
 
 

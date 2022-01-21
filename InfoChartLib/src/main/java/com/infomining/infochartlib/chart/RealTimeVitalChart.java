@@ -274,6 +274,19 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
         postInvalidate();
     }
 
+    /**
+     * 차트 자원 할당 해제
+     */
+    public void destory() {
+        mDataHandler.destroy();
+        mDrawingThread.setRunning(false);
+        mDrawingThread.interrupt();
+        mRealTimeVitalRenderer = null;
+        mDrawingThread = null;
+        mViewPortHandler = null;
+        mTransformer = null;
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         if(w > 0 && h > 0 && w < 10000 && h < 10000) {
@@ -391,6 +404,16 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
         return getRight();
     }
 
+    @Override
+    public int getChartWidth() {
+        return getWidth();
+    }
+
+    @Override
+    public int getChartHeight() {
+        return getHeight();
+    }
+
     public RealTimeDataHandler getDataHandler() {
         return mDataHandler;
     }
@@ -404,7 +427,8 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
     }
 
     public void setChartBackground(Drawable background) {
-        this.mChartBackgroundDrawable = ((BitmapDrawable)background).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable)background).getBitmap();
+        this.mChartBackgroundDrawable = bitmap;
         this.mChartBackgroundColor = null;
     }
 
