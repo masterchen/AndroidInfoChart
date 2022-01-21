@@ -390,7 +390,6 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
 
     @Override
     public int getChartBottom() {
-        Log.e("Chart", "bottom? " + getBottom());
         return getBottom();
     }
 

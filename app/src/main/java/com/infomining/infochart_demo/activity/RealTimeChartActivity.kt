@@ -57,7 +57,6 @@ class RealTimeChartActivity : BaseActivity() {
     }
 
     private fun initChart() {
-        Log.e("chart", "차트 초기화")
         spec = Spec()
         chart.setRealTimeSpec(spec)
         chart.setChartBackground(ResourcesCompat.getDrawable(resources, R.drawable.ecg_background, null))
