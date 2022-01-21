@@ -41,7 +41,6 @@ public class Transformer {
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
         Bitmap resized = Bitmap.createBitmap(bitmap, 0, 0,width, height, matrix, false);
-        bitmap.recycle();
         return resized;
     }
 

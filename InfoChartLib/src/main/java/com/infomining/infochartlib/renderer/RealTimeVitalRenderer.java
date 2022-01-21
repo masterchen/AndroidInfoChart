@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import com.infomining.infochartlib.dataProvider.IVitalChartDataProvider;
 import com.infomining.infochartlib.util.Transformer;
@@ -121,6 +122,7 @@ public class RealTimeVitalRenderer {
             canvas.drawColor(mChart.getChartBackgroundColor());
         } else if(mChart.getChartBackgroundDrawable() != null) {
             if(backgroundDrawablePaint == null) {
+                Log.e("renderer", "다시 세팅");
                 backgroundDrawablePaint = new Paint();
                 Bitmap bitmap = mChart.getChartBackgroundDrawable();
                 backgroundDrawablePaint.setShader(new BitmapShader(mTransformer.resizeBitmap(bitmap, mChart.getChartWidth(), mChart.getChartHeight()), Shader.TileMode.MIRROR, Shader.TileMode.CLAMP));

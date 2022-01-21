@@ -281,6 +281,10 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
         mDataHandler.destroy();
         mDrawingThread.setRunning(false);
         mDrawingThread.interrupt();
+        mRealTimeVitalRenderer = null;
+        mDrawingThread = null;
+        mViewPortHandler = null;
+        mTransformer = null;
     }
 
     @Override
@@ -423,7 +427,8 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
     }
 
     public void setChartBackground(Drawable background) {
-        this.mChartBackgroundDrawable = ((BitmapDrawable)background).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable)background).getBitmap();
+        this.mChartBackgroundDrawable = bitmap;
         this.mChartBackgroundColor = null;
     }
 
