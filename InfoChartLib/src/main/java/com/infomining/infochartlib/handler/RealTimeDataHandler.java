@@ -151,7 +151,7 @@ public class RealTimeDataHandler {
 
         DataDequeueTask(int oneSecondDataCount) {
             // TODO: 최적화를 위한 계산식 수정
-            this.mOneDataTime = (int) Math.max((1000000 / oneSecondDataCount) * 1, 1);
+            this.mOneDataTime = (int) Math.max((1000000 / oneSecondDataCount) * 0.8, 1);
             this.prevTime = System.currentTimeMillis();
         }
 

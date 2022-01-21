@@ -55,7 +55,6 @@ public class DrawingThread extends Thread {
 
                 synchronized (surfaceHolder) {
                     // draw
-                    canvas.drawColor(Color.WHITE);
                     renderer.drawVitalValue(canvas);
                 }
 
