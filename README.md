@@ -1,6 +1,6 @@
 ![symbol](https://user-images.githubusercontent.com/57319751/113797582-82c38780-978c-11eb-8c1a-443597935f4a.png)
 
-![Generic badge](https://img.shields.io/badge/version-v1.1.2-blue.svg)
+![Generic badge](https://img.shields.io/badge/version-v1.2.0-blue.svg)
 ![Generic badge](https://img.shields.io/badge/API-+19-orange.svg)
 
 # InfoCharts-Android
@@ -157,6 +157,7 @@ ECG 등의 `실시간 생체 신호`를 표시해주는 차트입니다. 실제 
 - `setEnabledValueCircleIndicator(boolean)` : 가장 마지막으로 그려진 값을 표시하는 인디케이터 활성 여부를 설정합니다.
 - `setValueCircleIndicatorRadius(float)` : 가장 마지막으로 그려진 값을 표시하는 인디케이터의 크기를 설정합니다.
 - `setValueCircleIndicatorColor(int)` : 가장 마지막으로 그려진 값을 표시하는 인디케이터의 색상을 설정합니다.
+- `setChartBackground(int)`, `setChartBackground(Drawable)` : 차트의 백그라운드를 설정합니다.
 
 ### 2) 데이터 관련
 
