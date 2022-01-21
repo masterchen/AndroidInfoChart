@@ -2,6 +2,7 @@ package com.infomining.infochartlib.chart;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -99,6 +100,22 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
      * @see #getLineMode()
      */
     protected LineMode mLineMode;
+
+    /**
+     * 차트 백그라운드 (drawable)
+     *
+     * @see #getChartBackgroundDrawable()
+     * @see #setChartBackground(Drawable)
+     */
+    protected Drawable mChartBackgroundDrawable;
+
+    /**
+     * 차트 백그라운드 (color)
+     *
+     * @see #getChartBackgroundColor()
+     * @see #setChartBackground(int)
+     */
+    protected Integer mChartBackgroundColor;
 
     /**
      * 현재 값 인디케이터 활성 여부
@@ -311,6 +328,16 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
     }
 
     @Override
+    public Drawable getChartBackgroundDrawable() {
+        return mChartBackgroundDrawable;
+    }
+
+    @Override
+    public Integer getChartBackgroundColor() {
+        return mChartBackgroundColor;
+    }
+
+    @Override
     public boolean getEnabledValueCircleIndicator() {
         return isEnabledValueCircleIndicator;
     }
@@ -350,6 +377,16 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
 
     public void setLineWidth(float mLineWidth) {
         this.mLineWidth = mLineWidth;
+    }
+
+    public void setChartBackground(Drawable background) {
+        this.mChartBackgroundDrawable = background;
+        this.mChartBackgroundColor = null;
+    }
+
+    public void setChartBackground(int color) {
+        this.mChartBackgroundColor = color;
+        this.mChartBackgroundDrawable = null;
     }
 
     public void setEnabledValueCircleIndicator(boolean enabledValueCircleIndicator) {

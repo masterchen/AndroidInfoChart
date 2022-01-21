@@ -1,6 +1,7 @@
 package com.infomining.infochartlib.renderer;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.infomining.infochartlib.dataProvider.IVitalChartDataProvider;
@@ -108,6 +109,15 @@ public class RealTimeVitalRenderer {
 
     private void drawLinear(Canvas canvas) {
         alphaCount = 0;
+
+        if(mChart.getChartBackgroundColor() != null) {
+            canvas.drawColor(mChart.getChartBackgroundColor());
+        } else if(mChart.getChartBackgroundDrawable() != null) {
+            mChart.getChartBackgroundDrawable().draw(canvas);
+        } else {
+            canvas.drawColor(Color.WHITE);
+        }
+
         mRenderPaint.setColor(mChart.getLineColor());
         mRenderPaint.setStrokeWidth(mChart.getLineWidth());
 
