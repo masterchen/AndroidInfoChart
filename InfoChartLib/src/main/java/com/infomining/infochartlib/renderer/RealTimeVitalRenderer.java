@@ -1,8 +1,13 @@
 package com.infomining.infochartlib.renderer;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
 
 import com.infomining.infochartlib.dataProvider.IVitalChartDataProvider;
 import com.infomining.infochartlib.util.Transformer;
@@ -65,6 +70,7 @@ public class RealTimeVitalRenderer {
     public void updateSettings() {
         mDrawPointer = 0;
         mRemovePointer = mChart.getTotalRangeCount() - (int)(mChart.getTotalRangeCount() * (1 - mChart.getRefreshGraphInterval()));
+        backgroundDrawablePaint = null;
         //mRemoveRangeCount = (int) (mChart.getTotalRangeCount() * mChart.getRefreshGraphInterval());
     }
 
@@ -106,6 +112,7 @@ public class RealTimeVitalRenderer {
     protected float[] mLineBuffer = new float[4];
     float firstY, secondY;
     int x, alphaCount = 0;
+    Paint backgroundDrawablePaint;
 
     private void drawLinear(Canvas canvas) {
         alphaCount = 0;
@@ -113,7 +120,12 @@ public class RealTimeVitalRenderer {
         if(mChart.getChartBackgroundColor() != null) {
             canvas.drawColor(mChart.getChartBackgroundColor());
         } else if(mChart.getChartBackgroundDrawable() != null) {
-            mChart.getChartBackgroundDrawable().draw(canvas);
+            if(backgroundDrawablePaint == null) {
+                Bitmap bitmap = Bitmap.createScaledBitmap(mChart.getChartBackgroundDrawable(), mChart.getChartRight(), mChart.getChartBottom(), true);
+                backgroundDrawablePaint = new Paint();
+                backgroundDrawablePaint.setShader(new BitmapShader(bitmap, Shader.TileMode.MIRROR, Shader.TileMode.CLAMP));
+            }
+            canvas.drawRect(0, 0, mChart.getChartRight(), mChart.getChartBottom(), backgroundDrawablePaint);
         } else {
             canvas.drawColor(Color.WHITE);
         }
