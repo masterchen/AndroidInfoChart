@@ -122,7 +122,6 @@ public class RealTimeVitalRenderer {
             canvas.drawColor(mChart.getChartBackgroundColor());
         } else if(mChart.getChartBackgroundDrawable() != null) {
             if(backgroundDrawablePaint == null) {
-                Log.e("renderer", "다시 세팅");
                 backgroundDrawablePaint = new Paint();
                 Bitmap bitmap = mChart.getChartBackgroundDrawable();
                 backgroundDrawablePaint.setShader(new BitmapShader(mTransformer.resizeBitmap(bitmap, mChart.getChartWidth(), mChart.getChartHeight()), Shader.TileMode.MIRROR, Shader.TileMode.CLAMP));
