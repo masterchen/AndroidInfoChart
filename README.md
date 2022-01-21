@@ -1,6 +1,6 @@
 ![symbol](https://user-images.githubusercontent.com/57319751/113797582-82c38780-978c-11eb-8c1a-443597935f4a.png)
 
-![Generic badge](https://img.shields.io/badge/version-v1.2.1-blue.svg)
+![Generic badge](https://img.shields.io/badge/version-v1.2.2-blue.svg)
 ![Generic badge](https://img.shields.io/badge/API-+19-orange.svg)
 
 # InfoCharts-Android
@@ -158,6 +158,7 @@ ECG 등의 `실시간 생체 신호`를 표시해주는 차트입니다. 실제 
 - `setValueCircleIndicatorRadius(float)` : 가장 마지막으로 그려진 값을 표시하는 인디케이터의 크기를 설정합니다.
 - `setValueCircleIndicatorColor(int)` : 가장 마지막으로 그려진 값을 표시하는 인디케이터의 색상을 설정합니다.
 - `setChartBackground(int)`, `setChartBackground(Drawable)` : 차트의 백그라운드를 설정합니다.
+- `destory()` : 차트에 할당된 자원을 해제합니다. __(* 이를 하지 않을 경우 스케쥴러 및 렌더링 스레드로 인하여 앱 성능 저하의 원인이 될 수 있습니다.)__
 
 ### 2) 데이터 관련
 
@@ -166,7 +167,6 @@ ECG 등의 `실시간 생체 신호`를 표시해주는 차트입니다. 실제 
 - `getDataHandler().run()` : 실시간 데이터를 차트에 출력합니다. 핸들러에 출력할 데이터가 남아있다면 해당 데이터들을 순차적으로 차트에 출력하고, 없다면 기본값이 출력됩니다.
 - `getDataHandler().stop()` : 차트에 실시간 데이터 출력을 정지합니다.
 - `getDataHandler().reset()` : 핸들러에 있는 데이터를 초기화 합니다. 실시간 데이터 출력에 영향을 미치지 않습니다.
-- `getDataHandler().destory()` : 핸들러에 할당된 자원을 해제합니다. __(* 이를 하지 않을 경우 스케쥴러 및 렌더링 스레드로 인하여 앱 성능 저하의 원인이 될 수 있습니다.)__
 
 # 📄 Documentaion
 - SDK에 대한 상세한 정보는 [JavaDoc](https://infodevelop.github.io/AndroidInfoChart/)을 통해 확인하실 수 있습니다.
