@@ -1,9 +1,12 @@
 package com.infomining.infochartlib.chart;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -107,7 +110,7 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
      * @see #getChartBackgroundDrawable()
      * @see #setChartBackground(Drawable)
      */
-    protected Drawable mChartBackgroundDrawable;
+    protected Bitmap mChartBackgroundDrawable;
 
     /**
      * 차트 백그라운드 (color)
@@ -328,7 +331,7 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
     }
 
     @Override
-    public Drawable getChartBackgroundDrawable() {
+    public Bitmap getChartBackgroundDrawable() {
         return mChartBackgroundDrawable;
     }
 
@@ -367,6 +370,27 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
         return mTransformer;
     }
 
+    @Override
+    public int getChartTop() {
+        return getTop();
+    }
+
+    @Override
+    public int getChartBottom() {
+        Log.e("Chart", "bottom? " + getBottom());
+        return getBottom();
+    }
+
+    @Override
+    public int getChartLeft() {
+        return getLeft();
+    }
+
+    @Override
+    public int getChartRight() {
+        return getRight();
+    }
+
     public RealTimeDataHandler getDataHandler() {
         return mDataHandler;
     }
@@ -380,7 +404,7 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
     }
 
     public void setChartBackground(Drawable background) {
-        this.mChartBackgroundDrawable = background;
+        this.mChartBackgroundDrawable = ((BitmapDrawable)background).getBitmap();
         this.mChartBackgroundColor = null;
     }
 

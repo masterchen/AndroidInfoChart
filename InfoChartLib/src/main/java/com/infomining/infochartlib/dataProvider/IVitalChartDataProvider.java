@@ -1,6 +1,7 @@
 package com.infomining.infochartlib.dataProvider;
 
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 import com.infomining.infochartlib.chart.RealTimeVitalChart;
@@ -42,8 +43,16 @@ public interface IVitalChartDataProvider {
 
     void dequeueRealTimeData(float value);
 
-    Drawable getChartBackgroundDrawable();
+    Bitmap getChartBackgroundDrawable();
 
     Integer getChartBackgroundColor();
+
+    int getChartLeft();
+
+    int getChartTop();
+
+    int getChartRight();
+
+    int getChartBottom();
 
 }

@@ -3,6 +3,7 @@ package com.infomining.infochart_demo.activity
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import com.infomining.infochart_demo.DummyData
 import com.infomining.infochart_demo.R
 import com.infomining.infochartlib.chart.RealTimeVitalChart
