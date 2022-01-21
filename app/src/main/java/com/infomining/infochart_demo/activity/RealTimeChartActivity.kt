@@ -58,11 +58,12 @@ class RealTimeChartActivity : BaseActivity() {
     private fun initChart() {
         spec = Spec()
         chart.setRealTimeSpec(spec)
+        chart.setChartBackground(ResourcesCompat.getDrawable(resources, R.drawable.ecg_background, null))
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        chart.dataHandler.destroy()
+        chart.destory()
     }
 
 

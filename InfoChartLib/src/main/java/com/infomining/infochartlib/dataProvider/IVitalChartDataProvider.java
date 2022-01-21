@@ -55,4 +55,8 @@ public interface IVitalChartDataProvider {
 
     int getChartBottom();
 
+    int getChartHeight();
+
+    int getChartWidth();
+
 }

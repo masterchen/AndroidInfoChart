@@ -121,9 +121,9 @@ public class RealTimeVitalRenderer {
             canvas.drawColor(mChart.getChartBackgroundColor());
         } else if(mChart.getChartBackgroundDrawable() != null) {
             if(backgroundDrawablePaint == null) {
-                Bitmap bitmap = Bitmap.createScaledBitmap(mChart.getChartBackgroundDrawable(), mChart.getChartRight(), mChart.getChartBottom(), true);
                 backgroundDrawablePaint = new Paint();
-                backgroundDrawablePaint.setShader(new BitmapShader(bitmap, Shader.TileMode.MIRROR, Shader.TileMode.CLAMP));
+                Bitmap bitmap = mChart.getChartBackgroundDrawable();
+                backgroundDrawablePaint.setShader(new BitmapShader(mTransformer.resizeBitmap(bitmap, mChart.getChartWidth(), mChart.getChartHeight()), Shader.TileMode.MIRROR, Shader.TileMode.CLAMP));
             }
             canvas.drawRect(0, 0, mChart.getChartRight(), mChart.getChartBottom(), backgroundDrawablePaint);
         } else {
