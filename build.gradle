@@ -21,6 +21,8 @@ allprojects {
         jcenter()
         maven { url "https://jitpack.io" }
     }
+
+    group = 'com.github.infodevelop'
 }
 
 task clean(type: Delete) {
