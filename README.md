@@ -1,6 +1,6 @@
 ![symbol](https://user-images.githubusercontent.com/57319751/113797582-82c38780-978c-11eb-8c1a-443597935f4a.png)
 
-![Generic badge](https://img.shields.io/badge/version-v1.2.2-blue.svg)
+![Generic badge](https://img.shields.io/badge/version-v1.2.3-blue.svg)
 ![Generic badge](https://img.shields.io/badge/API-+19-orange.svg)
 
 # InfoCharts-Android
