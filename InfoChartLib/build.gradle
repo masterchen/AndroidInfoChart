@@ -10,7 +10,7 @@ afterEvaluate {
             release(MavenPublication){
                 from components.release
                 groupId = 'com.infomining.infochartlib'
-                artifactId = 'InfoCHartLib'
+                artifactId = 'InfoChartLib'
                 version = 'v1.2.3'
             }
 
@@ -18,7 +18,7 @@ afterEvaluate {
                 // Applies the component for the debug build variant.
                 from components.debug
                 groupId = 'com.infomining.infochartlib'
-                artifactId = 'InfoCHartLib'
+                artifactId = 'InfoChartLib'
                 version = 'v1.2.3'
             }
         }
