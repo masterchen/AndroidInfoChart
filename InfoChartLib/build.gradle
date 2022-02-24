@@ -11,7 +11,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.infomining.infochartlib'
                 artifactId = 'InfoChartLib'
-                version = 'v1.2.3'
+                version = 'v1.2.6'
             }
 
             debug(MavenPublication) {
@@ -19,7 +19,7 @@ afterEvaluate {
                 from components.debug
                 groupId = 'com.infomining.infochartlib'
                 artifactId = 'InfoChartLib'
-                version = 'v1.2.3'
+                version = 'v1.2.6'
             }
         }
     }
