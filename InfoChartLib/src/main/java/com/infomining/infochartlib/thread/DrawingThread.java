@@ -59,7 +59,7 @@ public class DrawingThread extends Thread {
                 }
 
             } catch (Exception e) {
-
+                surfaceHolder.unlockCanvasAndPost(canvas);
             } finally {
                 if (canvas != null) {
                     surfaceHolder.unlockCanvasAndPost(canvas);

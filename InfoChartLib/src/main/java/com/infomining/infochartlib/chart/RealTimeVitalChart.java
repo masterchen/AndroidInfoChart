@@ -180,18 +180,10 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
-        boolean retry = true;
-
-        mDrawingThread.setRunning(false);
-        reset();
-
-        while (retry) {
-            try {
-                mDrawingThread.join();
-                retry = false;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        if(mDrawingThread.isAlive()) {
+            reset();
+            mDrawingThread.setRunning(false);
+            destory();
         }
     }
 
@@ -278,13 +270,21 @@ public class RealTimeVitalChart extends SurfaceView implements IVitalChartDataPr
      * 차트 자원 할당 해제
      */
     public void destory() {
-        mDataHandler.destroy();
-        mDrawingThread.setRunning(false);
-        mDrawingThread.interrupt();
-        mRealTimeVitalRenderer = null;
-        mDrawingThread = null;
-        mViewPortHandler = null;
-        mTransformer = null;
+        if(mDataHandler != null) {
+            mDataHandler.destroy();
+        }
+
+        if(mDrawingThread != null) {
+            mDrawingThread.setRunning(false);
+
+            try {
+                mDrawingThread.interrupt();
+                mDrawingThread.join();
+            } catch (InterruptedException e) {
+                mDrawingThread = null;
+            }
+        }
+
     }
 
     @Override
